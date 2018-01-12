@@ -40,7 +40,19 @@
 
                             <div class="block-content">
                                 <div class="push-10">
-                                    <div class="h5 font-w600 text-success pull-right push-10-l"><i class="fa fa-heart pull-right" aria-hidden="true"></i>{{$media->vote_average}}</div>
+                                    <div class="h5 font-w600 text-success pull-right push-10-l">
+                                      <?php
+                                     if($media->rating==0) {
+                                                        echo "No rating";
+                                                }
+                                                else{
+                                                  for($i=1; $i<=$media->rating; $i++){
+                                                        echo  "<i class='fa fa-star'></i>";
+                                                    }
+                                                 }
+                                      ?>
+                                     
+                                  </div>
                                     <a class="h5" href="detail/{{$media->id}}"><?php echo substr($media->title,0,25); ?></a>
                                 </div>
 

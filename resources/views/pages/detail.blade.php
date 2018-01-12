@@ -123,11 +123,24 @@
                                     <!-- Vital Info -->
                                     <div class="clearfix">
                                         <div class="pull-right">
-                                            <span class="h2 font-w700 text-success">{{$movie_detail->vote_average}}</span>
+                                            <span class="h2 font-w700 text-success">     
+                                             <?php
+                                                if($movie_detail->rating==0) {
+                                                        echo "No rating";
+                                                }
+                                                else{
+                                                  for($i=1; $i<=$movie_detail->rating; $i++){
+                                                        echo  "<i class='fa fa-star'></i>";
+                                                    }
+                                                 }
+                                                  ?>
+
+                                          
+                                          </span>
                                         </div>
-                                        <span class="h5">
+                                      <!--  <span class="h5">
                                                         <span class="font-w600 text-success">Rating</span>
-                                                    </span>
+                                                    </span>-->
                                     </div>
                                     <hr>
                                     Status:
@@ -256,7 +269,16 @@
                                                     <tr>
                                                         <td>Rating</td>
                                                         <td>
-                                                            {{$movie_detail->rating}}
+                                                          <?php
+                                                           if($movie_detail->rating==0) {
+                                                              echo "No rating";
+                                                            }
+                                                            else{
+                                                              for($i=1; $i<=$movie_detail->rating; $i++){
+                                                                echo  "<i class='fa fa-star'></i>";
+                                                              }
+                                                           }
+                                                            ?>
                                                         </td>
                                                     </tr>
                                                     </tbody>

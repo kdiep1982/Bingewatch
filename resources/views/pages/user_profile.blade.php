@@ -127,7 +127,7 @@
                                 ?>
                             </ul>
                             <div class="text-center push">
-                                <small><a href="javascript:void(0)">Read More..</a></small>
+                                <small>{{$review_ratings->links()}}</small>
                             </div>
                         </div>
                     </div>
@@ -160,7 +160,17 @@
                                                echo "<tr>";
                                             echo "<td class='text-center'>".$counter."</td>";
                                             echo "<td><a href='detail/$watchlist->id'>$watchlist->title</a></td>";
-                                            echo "<td>5 stars</td>";
+                                            if($watchlist->rating==0) {
+                                                        echo "<td>No Rating</td>";
+                                                }
+                                                else{
+                                                  echo "<td>";
+                                                  for($i=1; $i<=$watchlist->rating; $i++){
+                                                        echo  "<i class='fa fa-star'></i>";
+                                                    }
+                                                  echo "</td>";
+                                                 }
+                                           
                                             if($watchlist->type=="Movie"){
                                                 echo "<td class='hidden-xs'><span class='label label-warning'>$watchlist->type</span></td>";
                                             }

@@ -41,9 +41,10 @@ class UsersController extends Controller
             ->select('medias.id')->where([['medias.type','=','Movie'],['reviews.author','=',$user_email]])->get());
 
         $review_ratings =\DB::table('medias')->join('media_review', 'media_review.media_id','=','medias.id')->join('reviews','reviews.id','=','media_review.review_id')
-            ->select('reviews.review_rating', 'reviews.review_content','medias.title','medias.id')->where([['reviews.author','=',$user_email]])->get();
+            ->select('reviews.review_rating', 'reviews.review_content','medias.title','medias.id')->where([['reviews.author','=',$user_email]])->orderBy('reviews.created_at','desc')->paginate(5);
 
-        $user_watchlist = \DB::table('medias')->join('user_watchlist', 'user_watchlist.media_id','=','medias.id')->select('medias.title','medias.type','medias.id')->where('user_watchlist.user_id','=',$user_id)->get();
+        $user_watchlist = \DB::table('medias')->join('user_watchlist', 'user_watchlist.media_id','=','medias.id')
+          ->select('medias.title','medias.type','medias.id','medias.rating')->where('user_watchlist.user_id','=',$user_id)->get();
 
 
         return view('pages.user_profile',compact('movie_reviews','tv_reviews','review_ratings','user_watchlist'));

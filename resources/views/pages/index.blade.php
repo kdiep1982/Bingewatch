@@ -16,16 +16,18 @@
         <div class="col-lg-12">
             <div class="block">
                 <div class="js-slider remove-margin-b" data-slider-autoplay="true">
-                    <div>
-                        <img class="img-responsive img-homepage-slider" src="http://cf2.imgobject.com/t/p/original/jZcF7xZVvrX2A4qNOqeHpmtbdBT.jpg" alt="" >
-                    </div>
-                    <div>
-                        <img class="img-responsive img-homepage-slider" src="http://cf2.imgobject.com/t/p/original/fyy1nDC8wm553FCiBDojkJmKLCs.jpg" alt="" >
-                    </div>
-                    <div>
-                        <img class="img-responsive img-homepage-slider" src="http://cf2.imgobject.com/t/p/original/y52mjaCLoJJzxfcDDlksKDngiDx.jpg" alt="" >
-                    </div>
-
+                 
+                      <?php
+                        $pic=\DB::table('medias')->select('poster')->where([['status','=','Released'],['rating','!=','0']])->orderBy('rating','release_date','desc')->limit(3)->get();
+                       foreach($pic as $p){
+                         echo "<div>";
+                          echo "<img class='img-responsive img-homepage-slider' src='$p->poster' >";
+                         echo "</div>";
+                          
+                        }
+                      ?>
+                      
+           
                 </div>
 
             </div>
@@ -55,7 +57,20 @@
 
                             <div class="block-content">
                                 <div class="push-10">
-                                    <div class="h4 font-w600 text-success pull-right push-10-l"><i class="fa fa-heart pull-right" aria-hidden="true"></i>{{$media->vote_average}}</div>
+                                    <div class="h4 font-w600 text-success pull-right push-10-l">
+                                      <?php
+                                     if($media->rating==0) {
+                                                        echo "No rating";
+                                                }
+                                                else{
+                                                  for($i=1; $i<=$media->rating; $i++){
+                                                        echo  "<i class='fa fa-star'></i>";
+                                                    }
+                                                 }
+                                      ?>
+                                     
+                                  
+                                  </div>
                                     <a class="h4" href="detail/{{$media->media_id}}">{{$media->title}}</a>
                                 </div>
                                 <?php $release=date("m/d/Y",strtotime($media->release_date));?>
@@ -94,7 +109,19 @@
                             </div>
                             <div class="block-content">
                                 <div class="push-10">
-                                    <div class="h4 font-w600 text-success pull-right push-10-l"><i class="fa fa-heart pull-right" aria-hidden="true"></i>{{$media->vote_average}}</div>
+                                    <div class="h4 font-w600 text-success pull-right push-10-l">
+                                      <?php
+                                     if($media->rating==0) {
+                                                        echo "No rating";
+                                                }
+                                                else{
+                                                  for($i=1; $i<=$media->rating; $i++){
+                                                        echo  "<i class='fa fa-star'></i>";
+                                                    }
+                                                 }
+                                      ?>
+                                     
+                                  </div>
                                     <a class="h4" href="detail/{{$media->media_id}}">{{$media->title}}</a>
                                 </div>
                                 <?php $release=date("m/d/Y",strtotime($media->release_date));?>
@@ -129,7 +156,19 @@
                             </div>
                             <div class="block-content">
                                 <div class="push-10">
-                                    <div class="h4 font-w600 text-success pull-right push-10-l"><i class="fa fa-heart pull-right" aria-hidden="true"></i>{{$media->vote_average}}</div>
+                                    <div class="h4 font-w600 text-success pull-right push-10-l">
+                                      <?php
+                                     if($media->rating==0) {
+                                                        echo "No rating";
+                                                }
+                                                else{
+                                                  for($i=1; $i<=$media->rating; $i++){
+                                                        echo  "<i class='fa fa-star'></i>";
+                                                    }
+                                                 }
+                                      ?>
+                                     
+                                  </div>
                                     <a class="h4" href="detail/{{$media->media_id}}">{{$media->title}}</a>
                                 </div>
                                 <?php $release=date("m/d/Y",strtotime($media->release_date));?>
